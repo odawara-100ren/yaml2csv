@@ -1,3 +1,10 @@
 #!/usr/bin/env ruby
+# 直接 $ ruby bin/jm.rb で実行したときに必要
+
+lib = File.expand_path('../../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require "yaml2csv"
+require "thor"
+
+# Your code goes here
