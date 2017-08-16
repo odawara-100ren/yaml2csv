@@ -1,10 +1,24 @@
 #!/usr/bin/env ruby
-# 直接 $ ruby bin/jm.rb で実行したときに必要
 
+# 以下２行は直接 $ ruby bin/jm.rb で実行したときに必要
 lib = File.expand_path('../../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 require "yaml2csv"
 require "thor"
+require "pry" # TODO: remove this line
 
-# Your code goes here
+module Yaml2csv
+  class CLI < Thor
+    class_option :help, type: :boolean, aliases: '-h', desc: "Show help message."
+    class_option :version, type: :boolean, desc: "Show version."
+    default_task :yaml2csv
+
+    desc "yaml2csv", "Convert yaml file to csv string."
+    def yaml2csv(yaml_file_path)
+      Yaml2csv.yaml_to_csv(yaml_file_path)
+    end
+  end
+end
+
+Yaml2csv::CLI.start(ARGV)
