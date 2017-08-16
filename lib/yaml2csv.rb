@@ -5,19 +5,29 @@ require 'pry'
 
 module Yaml2csv
   class Yaml2csv
+    # クラス変数の初期化
     @@depth = 0
     @@array = []
 
     # @param [String] file Yamlのファイル名
     def self.yaml_to_csv(path)
       hash = YAML::load_file(path)
+      init_array(hash)
+      walk(hash, 0, 0)
+      puts gen_csv_str
+    end
+
+    # @param [Hash] yamlを読み込んでハッシュ化したもの
+    def self.init_array(hash)
       depth(hash, 0)
       row_num = end_node_size(hash)
       @@array = Array.new(@@depth).map{ Array.new(row_num) }
-      walk(hash, 0, 0)
-      p @@array
-      # @@array.each do |col|
-      # end
+    end
+
+    def self.gen_csv_str
+      CSV.generate do |csv|
+        @@array.each {|row| csv << row}
+      end
     end
 
     # @param [Object] v walk対象
