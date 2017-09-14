@@ -1,28 +1,46 @@
 # Yaml2csv
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/yaml2csv`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Convert yaml file to csv format string.
+** Array is supported! **
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'yaml2csv'
+gem 'yaml2csv', github: "odawara-100ren/yaml2csv"
 ```
 
 And then execute:
 
-    $ bundle
+```
+$ bundle
+```
 
-Or install it yourself as:
+Or you can install it by yourself.
+[`specific_install`](https://github.com/rdp/specific_install) gem is needed for gem install.
 
-    $ gem install yaml2csv
+```
+$ gem install specific_install
+$ gem specific_install -l "https://github.com/odawara-100ren/yaml2csv"
+```
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+$ yaml2csv --file examples/example.yml
+```
+
+### Example
+
+```
+$ yaml2csv --file examples/example.yml
+path1,path1,path1,path1,path1,path1,path2
+path11,path11,path12,path13,path13,path13,key2a
+key11a,key11b,path121,value13_1,value13_2,value13_3,value2a
+value11a,value11b,key121a,,,,
+,,value121a,,,,
+```
 
 ## Development
 

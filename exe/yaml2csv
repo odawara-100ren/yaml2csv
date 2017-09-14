@@ -12,13 +12,16 @@ module Yaml2csv
   class CLI < Thor
     class_option :help, type: :boolean, aliases: '-h', desc: "Show help message."
     class_option :version, type: :boolean, desc: "Show version."
-    default_task :yaml2csv
+    default_command :yaml2csv
 
     desc "yaml2csv", "Convert yaml file to csv string."
-    def yaml2csv(yaml_file_path)
+    method_option :file, type: :string, aliases: ['-f', '--file']
+    def yaml2csv(*args)
+      yaml_file_path = options[:file]
+      raise "--file <ファイルパス>でファイルを指定してください。" unless yaml_file_path
       Yaml2csv.yaml_to_csv(yaml_file_path)
     end
   end
 end
 
-Yaml2csv::CLI.start(ARGV)
+Yaml2csv::CLI.start
